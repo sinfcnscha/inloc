@@ -9,19 +9,19 @@
 #include <stdio.h>
 
 #include <iostream>
-#include <cv.h>
-#include <highgui.h>
+//#include <cv.h>
+#include <opencv2/highgui/highgui.hpp>
 //#include <WinSock2.h>
-#include <WinSock.h>
-#include <Windows.h>
-#include <conio.h>
-#include <fstream>
+//#include <WinSock.h>
+//#include <Windows.h>
+//#include <conio.h>
+//#include <fstream>
 #define _USE_MATH_DEFINES
 #include <math.h>
 
 #include "InLoc_Cam.h"
-#include "InLoc_Socket.h"
-#include "InLoc_ReadCom.h"
+//#include "InLoc_Socket.h"
+//#include "InLoc_ReadCom.h"
 #include "InLoc_Richtung.h"
 #include "DatPicObj.h"
 #include "DatCoordMeth.h"
@@ -55,7 +55,7 @@ using namespace std;
 int main(){
 	 // subtrahend < 0 = Richtung nicht gesetzt
 	InLoc_Richtung richtung;
-	InLoc_ReadCom lese_lagemodul;
+	//InLoc_ReadCom lese_lagemodul;
 	int messdaten[ANZ_MESSWERTE];
 	float faktor_musterabstand = 1;
 	int eingabe_ganzzahl = 0;
@@ -76,7 +76,8 @@ int main(){
 	cv::Mat img;
 	cv::Point bildmittelpunkt;
 	DatGUI gui;
-
+	
+	/*
 	fstream f_messwerte;
 	f_messwerte.open(DATEI_MESSWERTE, ios::out);
 	f_messwerte << "x,y" << endl;
@@ -88,8 +89,10 @@ int main(){
 	faktor_musterabstand = 1 / (float)eingabe_ganzzahl;
 	cout << "Ermittelte Werte in cm werden mit " << faktor_musterabstand << " multipliziert" << endl;
 	system("pause");
+	*/
 	/*faktor_musterabstand = 1 / 6.5;*/
 	// ################## Time ##################################################################################################
+
 	clock_t start, end, start_t_speed, end_t_speed;
 	double diff, diff_s;
 
@@ -132,12 +135,13 @@ int main(){
 
 		// ################## Messwerte des Lagemoduls holen ####################################################################
 
-		lese_lagemodul.getValues(messdaten, ANZ_MESSWERTE);
+		//lese_lagemodul.getValues(messdaten, ANZ_MESSWERTE);
 
 		// d2 an Maßstab des Koordinatensystems anpassen
-		messdaten[POS_D2] = messdaten[POS_D2] * faktor_musterabstand;
+		//messdaten[POS_D2] = messdaten[POS_D2] * faktor_musterabstand;
 
 		// Magnetometer arbeitet schon ab etwa 5 grad Neigung nichtmehr richtig
+		/*
 		if( (abs(messdaten[POS_X]) < SCHWELLWERT_WINKEL_MAGNETOMETER) && (abs(messdaten[POS_Z]) < SCHWELLWERT_WINKEL_MAGNETOMETER))
 		{
 			richtung.setSchreibschutz(false);
@@ -149,10 +153,10 @@ int main(){
 
 		richtung.setKompass(messdaten[POS_KOMPASS]);
 
-
 		cout << "+++++++++++++++ KOMPASS: " << richtung.getKompass() << endl;
 		cout << "+++++++++++++++ SUBTRAHEND: " << richtung.getSubtrahend() << endl;
 		cout << "+++++++++++++++ RICHTUNG: " << richtung.getRichtung() << endl;
+		*/
 
 
 		// ################## Objekte mappen ####################################################################################	
@@ -169,6 +173,7 @@ int main(){
 		// ################## Messdaten auf aktuelle_Position anwenden ##########################################################
 		
 		// Quadrant des Systems bestimmen
+		/*
 		int x_lagemodul = messdaten[POS_X];
 		int z_lagemodul = messdaten[POS_Z];
 
@@ -287,6 +292,7 @@ int main(){
 			f_messwerte << aktuelle_Position.getWorldX() << "," << aktuelle_Position.getWorldY() << endl;
 			f_messwerte.close();
 		}
+		*/
 
 		// ################## Grafische Darstellung #############################################################################
 		end_t_speed = clock();

@@ -11,7 +11,9 @@
 #include "DatPicObjects.h"
 #include "DatCoordPoints.h"
 #include <ctype.h>
-#include <cv.h>
+#include <opencv2/core/core.hpp>
+
+using namespace cv;
 
 class DatObjDetect
 {
@@ -20,7 +22,7 @@ private:
 	int x, y, height, width, x_m, y_m;
 	
 	// Load the HaarClassifierCascade
-	cv::CascadeClassifier cascade_cpp;
+	CascadeClassifier cascade_cpp;
 	
 
 

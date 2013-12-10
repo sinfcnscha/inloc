@@ -8,8 +8,8 @@
 //
 #pragma once
 
-#include <cv.h>
-#include <highgui.h>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 #define DEVICE_STANDARD 0;
 using namespace cv;

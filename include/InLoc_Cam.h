@@ -7,8 +7,9 @@
 #pragma once
 
 #include <iostream>
-#include <cv.h>
-#include <highgui.h>
+#include <string>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 #define DEVICE_STANDARD 0;
 
@@ -17,7 +18,7 @@ using namespace cv;
 class InLoc_Cam
 {
 private:
-	string input_vid;
+	std::string input_vid;
 	cv::VideoCapture cap;
 
 public:
