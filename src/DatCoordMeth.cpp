@@ -74,7 +74,7 @@ int  DatCoordMeth::getSide( DatCoord<int> &p_reference, DatCoord<int> &point){
 int DatCoordMeth::determineNearest( DatCoord<int> &p_reference, DatCoordPoints &points){
 
 	// Erstes Objekt als Startwert für die Ermittlung des Punktes welcher sich am nähesten am Punkt p_center befindet
-	DatCoord<int> tmp_coord = abs(p_reference - points.getCoordAt(0).getPixelCoord());
+	DatCoord<int> tmp_coord = abs(p_reference - points.getCoordAt(0).getPixelCoord() );
 	int dist = tmp_coord.getVecLen();
 	int dis_tmp;
 	int i_posErg = 0;

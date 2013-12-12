@@ -8,8 +8,6 @@
 //
 
 #include "DatObjDetect.h"
-//#include "opencv2/imgproc/imgproc.hpp"
-//#include "opencv2/objdetect/objdetect.hpp"
 
 DatObjDetect::DatObjDetect(string abs_cascade_path)
 {

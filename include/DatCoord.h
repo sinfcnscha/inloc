@@ -150,7 +150,7 @@ DatCoord<T> operator - ( DatCoord<T> &input1, DatCoord<T> &input2){
 };
 
 template <class T>
-DatCoord<T> abs( DatCoord<T> &input){
+DatCoord<T> abs( DatCoord<T> input){
 	DatCoord<T> output;
 	output.setX(abs(input.getX()));
 	output.setY(abs(input.getY()));

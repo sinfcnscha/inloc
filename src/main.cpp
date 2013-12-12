@@ -70,7 +70,7 @@ int main(){
 	DatCoordPoints WeltBild;
 	DatCoord<int> Bildmitte;
 	DatCam cam;
-	//DatObjDetect detect("G:\\studium\\Bachelorarbeit\\InLoc\\InLoc_Core\\Debug\\haarcascade.xml");
+	DatObjDetect detect("G:\\studium\\Bachelorarbeit\\InLoc\\InLoc_Core\\Debug\\haarcascade.xml");
 	//DatObjDetect detect("haarcascade.xml");
 	//DatObjDetect detect("haarcascadeNEU.xml");
 	Mat img;
