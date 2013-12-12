@@ -8,6 +8,7 @@
 //
 
 #pragma once
+#include <math.h>
 
 
 template <class T> class DatCoord

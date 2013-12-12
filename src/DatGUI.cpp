@@ -17,10 +17,10 @@ void callbackTrackbarInit(int state, void*){
 }
 
 // ################## Pause #############################################################################################
-boolean paused = false;
+bool paused = false;
 void onMouse( int event, int x, int y, int , void*)
 {
-	if( event == CV_EVENT_LBUTTONDOWN ){
+	if( event == cv::EVENT_LBUTTONDOWN ){
 		paused = true;
 	}
 }
@@ -40,9 +40,9 @@ void DatGUI::init(){
 }
 void DatGUI::update(cv::Mat &img, DatCoordPoint& bildmitte, DatCoordPoints WeltBild, DatCoordPoints BildObjekte, double speed){
 	int i;
-	CvFont font;
+	cv::QtFont font;
 	cv::Point bildmittelpunkt;
-	cvInitFont(&font, CV_FONT_HERSHEY_SIMPLEX, 1.0, 1.0, 0, 1.8, CV_AA);
+	//cv::cvInitFont(&font, cv::FONT_HERSHEY_SIMPLEX, 1.0, 1.0, 0, 1.8, 8);//CV_AA
 	string objekt_text, text_pixelCoord, text_worldCoord, text_speed;
 	char tmp[512];
 

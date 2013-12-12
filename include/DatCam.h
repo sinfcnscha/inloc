@@ -8,6 +8,7 @@
 //
 #pragma once
 
+#include <string>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
@@ -17,7 +18,7 @@ using namespace cv;
 class DatCam
 {
 private:
-	string input_vid;
+	std::string input_vid;
 	cv::VideoCapture cap;
 
 public:

@@ -8,6 +8,8 @@
 //
 
 #include "DatObjDetect.h"
+//#include "opencv2/imgproc/imgproc.hpp"
+//#include "opencv2/objdetect/objdetect.hpp"
 
 DatObjDetect::DatObjDetect(string abs_cascade_path)
 {
@@ -38,7 +40,8 @@ void DatObjDetect::detectObjects(cv::Mat &img, DatCoordPoints &BildObjekte){
 		// Detect the objects and store them in the sequence
 		vector<cv::Rect> my_objects;
 		double scale = 1.1;
-		cascade_cpp.detectMultiScale(img, my_objects, scale, 2, 0|CV_HAAR_SCALE_IMAGE);//, min_size, max_size);	
+		// CV_HAAR_SCALE_IMAGE
+		cascade_cpp.detectMultiScale(img, my_objects, scale, 2, 0|CASCADE_SCALE_IMAGE);//, min_size, max_size);	
 
 		for( i = 0; i < my_objects.size(); i++){
 			width = my_objects[i].width;

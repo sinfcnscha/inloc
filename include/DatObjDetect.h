@@ -11,7 +11,8 @@
 #include "DatPicObjects.h"
 #include "DatCoordPoints.h"
 #include <ctype.h>
-#include <opencv2/core/core.hpp>
+//#include <opencv2/core/core.hpp>
+#include <opencv2/objdetect/objdetect.hpp>
 
 using namespace cv;
 
