@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 2.8)
+project( InLoc )
+find_package( OpenCV REQUIRED )
+ADD_SUBDIRECTORY( src )
+#ADD_SUBDIRECTORY( include )
+#add_executable( run src/main.cpp src/DatCoordPoint.cpp src/DatCoordPoints.cpp )
+#include_directories( include )
+#target_link_libraries( run ${OpenCV_LIBS} )
