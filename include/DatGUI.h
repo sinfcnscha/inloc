@@ -14,6 +14,7 @@
 #include "DatCoordPoints.h"
 #include "DatCoord.h"
 #include <iostream>
+#include <sstream>
 
 #include <opencv2/core/core.hpp>
 

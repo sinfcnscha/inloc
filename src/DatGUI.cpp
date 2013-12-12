@@ -44,7 +44,9 @@ void DatGUI::update(cv::Mat &img, DatCoordPoint& bildmitte, DatCoordPoints WeltB
 	cv::Point bildmittelpunkt;
 	//cv::cvInitFont(&font, cv::FONT_HERSHEY_SIMPLEX, 1.0, 1.0, 0, 1.8, 8);//CV_AA
 	string objekt_text, text_pixelCoord, text_worldCoord, text_speed;
-	char tmp[512];
+	//char tmp[512];
+	stringstream ss;
+	string tmp;
 
 	cv::Point pt1, pt1_text, pt1_text2, pt_mitte, pt_img2;
 	cv::Point ptSpeed;
@@ -63,10 +65,15 @@ void DatGUI::update(cv::Mat &img, DatCoordPoint& bildmitte, DatCoordPoints WeltB
 	// Markiere Mittelpunkt
 	// TEXT PIXEL_COORD
 	text_pixelCoord = "x: ";
-	itoa( bildmittelpunkt.x , tmp,10);
+	//itoa( bildmittelpunkt.x , tmp,10);
+	ss << bildmittelpunkt.x;
+	tmp = ss.str();
 	text_pixelCoord += tmp;	
 	text_pixelCoord +=  "; y: ";
-	itoa( bildmittelpunkt.y, tmp,10);
+	//itoa( bildmittelpunkt.y, tmp,10);
+	ss.flush();
+	ss << bildmittelpunkt.y;
+	tmp = ss.str();
 	text_pixelCoord+= tmp;
 
 	// TEXT WORLD_COORD
@@ -79,11 +86,11 @@ void DatGUI::update(cv::Mat &img, DatCoordPoint& bildmitte, DatCoordPoints WeltB
 	NumberStringY << bildmitte.getWorldY();   
 	text_worldCoord+= NumberStringY.str();
 
-	circle(img, bildmittelpunkt, 10, CV_RGB(255,255,255), 2, 1, 0);
-	circle(img2, bildmittelpunkt, 10, CV_RGB(255,255,255), 2, 1, 0);
+	circle(img, bildmittelpunkt, 10, cv::Scalar(255,255,255), 2, 1, 0);
+	circle(img2, bildmittelpunkt, 10, cv::Scalar(255,255,255), 2, 1, 0);
 
 	//putText(img, text_pixelCoord, pt_mittelpunkt_text, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(255,255,255), 1.8, 8, false );
-	putText(img, text_worldCoord, pt_mittelpunkt_text, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(255,255,255), 1.8, 8, false );
+	putText(img, text_worldCoord, pt_mittelpunkt_text, cv::FONT_HERSHEY_SIMPLEX,0.5, cv::Scalar(255,255,255), 1.8, 8, false );
 
 	cv::setMouseCallback( "result", onMouse, 0);
 
@@ -108,19 +115,31 @@ void DatGUI::update(cv::Mat &img, DatCoordPoint& bildmitte, DatCoordPoints WeltB
 
 			// Text für Pixelkoordinate
 			text_pixelCoord = "x: ";
-			itoa( x , tmp,10);
+			//itoa( x , tmp,10);
+			ss.flush();
+			ss << x;
+			tmp = ss.str();
 			text_pixelCoord += tmp;	
 			text_pixelCoord +=  "; y: ";
-			itoa( y, tmp,10);
+			//itoa( y, tmp,10);
+			ss.flush();
+			ss << y;
+			tmp = ss.str();
 			text_pixelCoord+= tmp;
 
 			// Text für Weltkoordinate
 			objekt_text = "x: ";
-			itoa( WeltBild.getWorldXCoordAt(i), tmp,10);
+			//itoa( WeltBild.getWorldXCoordAt(i), tmp,10);
+			ss.flush();
+			ss << WeltBild.getWorldXCoordAt(i);
+			tmp = ss.str();
 			/*cout << "------------------ " << WeltBild.getWorldXCoordAt(i) << " " << WeltBild.getWorldYCoordAt(i) << endl;*/
 			objekt_text += tmp;	
 			objekt_text +=  "; y: ";
-			itoa( WeltBild.getWorldYCoordAt(i), tmp,10);
+			//itoa( WeltBild.getWorldYCoordAt(i), tmp,10);
+			ss.flush();
+			ss << WeltBild.getWorldYCoordAt(i);
+			tmp = ss.str();
 			objekt_text+= tmp;
 
 			// Male Weltkoordinate (0,0) grün Mittelpunkt +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -128,14 +147,14 @@ void DatGUI::update(cv::Mat &img, DatCoordPoint& bildmitte, DatCoordPoints WeltB
 				pt_welt_mitte.x = WeltBild.getCoordAt(i).getPixelCoord().getX();
 				pt_welt_mitte.y = WeltBild.getCoordAt(i).getPixelCoord().getY();
 
-				putText(img, objekt_text, pt1_text, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(0,255,0), 1.5, 8, false );
+				putText(img, objekt_text, pt1_text, cv::FONT_HERSHEY_SIMPLEX,0.5, cv::Scalar(0,255,0), 1.5, 8, false );
 
-				putText(img, text_pixelCoord, pt1_text2, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(0,255,0), 1.5, 8, false );
+				putText(img, text_pixelCoord, pt1_text2, cv::FONT_HERSHEY_SIMPLEX,0.5, cv::Scalar(0,255,0), 1.5, 8, false );
 
-				circle(img, pt1, (width/2), CV_RGB(0,255,0), 2, 1, 0);
+				circle(img, pt1, (width/2), cv::Scalar(0,255,0), 2, 1, 0);
 
 				// Male Linie zum Bildmittelpunkt
-				line(img, pt_welt_mitte, bildmittelpunkt,CV_RGB(0,255,0), 2, 8, 0);
+				line(img, pt_welt_mitte, bildmittelpunkt, cv::Scalar(0,255,0), 2, 8, 0);
 
 				// Dreieck
 				//pt_tmp1.x = pt_welt_mitte.x - ( pt_welt_mitte.x - bildmittelpunkt.x);// - pt_welt_mitte.x;
@@ -179,14 +198,14 @@ void DatGUI::update(cv::Mat &img, DatCoordPoint& bildmitte, DatCoordPoints WeltB
 				pt_welt_seitlich.x = WeltBild.getCoordAt(i).getPixelCoord().getX();
 				pt_welt_seitlich.y = WeltBild.getCoordAt(i).getPixelCoord().getY();
 
-				putText(img, objekt_text, pt1_text, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(0,0,255), 1.5, 8, false );
+				putText(img, objekt_text, pt1_text, cv::FONT_HERSHEY_SIMPLEX,0.5, cv::Scalar(0,0,255), 1.5, 8, false );
 
-				putText(img, text_pixelCoord, pt1_text2, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(0,0,255), 1.5, 8, false );
+				putText(img, text_pixelCoord, pt1_text2, cv::FONT_HERSHEY_SIMPLEX,0.5, cv::Scalar(0,0,255), 1.5, 8, false );
 
-				circle(img, pt1, (width/2), CV_RGB(0,0,255), 2, 1, 0);
+				circle(img, pt1, (width/2), cv::Scalar(0,0,255), 2, 1, 0);
 
 				// Male Linie zum Bildmittelpunkt
-				line(img, pt_welt_seitlich, bildmittelpunkt,CV_RGB(0,0,255), 2, 8, 0);
+				line(img, pt_welt_seitlich, bildmittelpunkt, cv::Scalar(0,0,255), 2, 8, 0);
 			}
 
 			// ################################## vertikaler Punkt ################################################################
@@ -195,13 +214,13 @@ void DatGUI::update(cv::Mat &img, DatCoordPoint& bildmitte, DatCoordPoints WeltB
 				pt_welt_vertikale.x = WeltBild.getCoordAt(i).getPixelCoord().getX();
 				pt_welt_vertikale.y = WeltBild.getCoordAt(i).getPixelCoord().getY();
 
-				putText(img, objekt_text, pt1_text, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(255,0,0), 1.5, 8, false );
+				putText(img, objekt_text, pt1_text, cv::FONT_HERSHEY_SIMPLEX,0.5, cv::Scalar(255,0,0), 1.5, 8, false );
 
-				putText(img, text_pixelCoord, pt1_text2, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(255,0,0), 1.5, 8, false );
+				putText(img, text_pixelCoord, pt1_text2, cv::FONT_HERSHEY_SIMPLEX,0.5, cv::Scalar(255,0,0), 1.5, 8, false );
 
-				circle(img, pt1, (width/2), CV_RGB(255,0,0), 2, 1, 0);
+				circle(img, pt1, (width/2), cv::Scalar(255,0,0), 2, 1, 0);
 				// Male Linie zum Bildmittelpunkt
-				line(img, pt_welt_vertikale, bildmittelpunkt,CV_RGB(255,0,0), 2, 8, 0);
+				line(img, pt_welt_vertikale, bildmittelpunkt,cv::Scalar(255,0,0), 2, 8, 0);
 			}
 			// ################################## Geschwindigkeit #################################################################
 			// Text für Geschwindigkeit
@@ -211,7 +230,7 @@ void DatGUI::update(cv::Mat &img, DatCoordPoint& bildmitte, DatCoordPoints WeltB
 			NumberStringSpeed << speed;   
 			text_speed = "SPEED: ";
 			text_speed += NumberStringSpeed.str();	
-			putText(img, text_speed, ptSpeed, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(255,0,0), 1.5, 8, false );
+			putText(img, text_speed, ptSpeed, cv::FONT_HERSHEY_SIMPLEX,0.5, cv::Scalar(255,0,0), 1.5, 8, false );
 
 			imshow("result", img);cv::waitKey(1);//ms
 
@@ -241,17 +260,29 @@ void DatGUI::update(cv::Mat &img, DatCoordPoint& bildmitte, DatCoordPoints WeltB
 
 		// Text für Pixelkoordinate
 		text_pixelCoord = "x: ";
-		itoa( x , tmp,10);
+		//itoa( x , tmp,10);
+		ss.flush();
+		ss << x;
+		tmp = ss.str();
 		text_pixelCoord += tmp;	
 		text_pixelCoord +=  "; y: ";
-		itoa( y, tmp,10);
+		//itoa( y, tmp,10);
+		ss.flush();
+		ss << y;
+		tmp = ss.str();
 		text_pixelCoord+= tmp;
 		// Text für Weltkoordinate
 		objekt_text = "x: ";
-		itoa( BildObjekte.getWorldXCoordAt(i), tmp,10);
+		//itoa( BildObjekte.getWorldXCoordAt(i), tmp,10);
+		ss.flush();
+		ss << BildObjekte.getWorldXCoordAt(i);
+		tmp = ss.str();
 		objekt_text += tmp;	
 		objekt_text +=  "; y: ";
-		itoa( BildObjekte.getWorldYCoordAt(i), tmp,10);
+		//itoa( BildObjekte.getWorldYCoordAt(i), tmp,10);
+		ss.flush();
+		ss << BildObjekte.getWorldYCoordAt(i);
+		tmp = ss.str();
 		objekt_text+= tmp;
 
 		
@@ -260,13 +291,13 @@ void DatGUI::update(cv::Mat &img, DatCoordPoint& bildmitte, DatCoordPoints WeltB
 		//circle(img2, pt_img2, (BildObjekte.getCoordAt(i).getPixelCoord().getWidth() / 2), CV_RGB(255,0,0), 2, 1, 0);
 		
 		if(BildObjekte.getCoordAt(i).isWorldSet()){
-			circle(img2, pt_img2, (BildObjekte.getCoordAt(i).getPixelCoord().getWidth() / 2), CV_RGB(255,0,0), 2, 1, 0);
-			putText(img2, objekt_text, pt1_text, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(255,0,0), 1.5, 8, false );
+			circle(img2, pt_img2, (BildObjekte.getCoordAt(i).getPixelCoord().getWidth() / 2), cv::Scalar(255,0,0), 2, 1, 0);
+			putText(img2, objekt_text, pt1_text, cv::FONT_HERSHEY_SIMPLEX,0.5, cv::Scalar(255,0,0), 1.5, 8, false );
 		}else{
-			circle(img2, pt_img2, (BildObjekte.getCoordAt(i).getPixelCoord().getWidth() / 2), CV_RGB(255,255,255), 2, 1, 0);
-			putText(img2, objekt_text, pt1_text, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(255,255,255), 1.5, 8, false );
+			circle(img2, pt_img2, (BildObjekte.getCoordAt(i).getPixelCoord().getWidth() / 2), cv::Scalar(255,255,255), 2, 1, 0);
+			putText(img2, objekt_text, pt1_text, cv::FONT_HERSHEY_SIMPLEX,0.5, cv::Scalar(255,255,255), 1.5, 8, false );
 		}
-		putText(img2, text_pixelCoord, pt1_text2, CV_FONT_HERSHEY_SIMPLEX,0.5, CV_RGB(0,255,0), 1.5, 8, false );
+		putText(img2, text_pixelCoord, pt1_text2, cv::FONT_HERSHEY_SIMPLEX,0.5, cv::Scalar(0,255,0), 1.5, 8, false );
 	}
 	imshow("result2", img2);
 	//cvMoveWindow("result2", 1000, 550);
