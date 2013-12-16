@@ -113,7 +113,7 @@ int DatCoordMeth::determineNearestLeft( int pos, DatCoordPoints &points){
 		if( i != pos){
 
 			// wenn links
-			if(  DatCoordMeth::getSide(points.getCoordAt(pos).getPixelCoord(), points.getCoordAt(i).getPixelCoord()) > 0){
+			if(  DatCoordMeth::getSide( points.getCoordAt(pos).getPixelCoord(), points.getCoordAt(i).getPixelCoord()) > 0){
 				// wenn winkel kleiner 45
 				tmpVec = points.getCoordAt(pos).getPixelCoord() - points.getCoordAt(i).getPixelCoord();
 
@@ -1170,7 +1170,7 @@ void DatCoordMeth::updateKnownPoints(DatCoordPoints &old_points, DatCoordPoints 
 
 void DatCoordMeth::sortCoordByDistance( DatCoord<int> &p_reference, DatCoordPoints &points, vector<int> &positionen){
 	unsigned int i;
-	vector<DatCoord<int>> elemente;
+	vector<DatCoord<int> > elemente;
 
 	// hole Elemente
 	for(i = 0; i < positionen.size(); i++){

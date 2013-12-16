@@ -29,7 +29,7 @@ public:
 
 	int getCntPicObj(void);
 
-	DatCoordPoint getCoordAt(int pos);
+	DatCoordPoint& getCoordAt(int pos);
 
 	int getPixelXCoordAt( int pos);
 	int getPixelYCoordAt( int pos);

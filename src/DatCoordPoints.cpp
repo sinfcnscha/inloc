@@ -24,7 +24,7 @@ DatCoordPoints::~DatCoordPoints(void)
 		return this->pic_objects.size();
 	}
 
-	DatCoordPoint DatCoordPoints::getCoordAt(int pos){
+	DatCoordPoint& DatCoordPoints::getCoordAt(int pos){
 		return this->pic_objects[pos];
 	}
 	int DatCoordPoints::getPixelXCoordAt( int pos){

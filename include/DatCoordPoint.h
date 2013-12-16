@@ -25,7 +25,7 @@ public:
 	DatCoordPoint(int x, int y, int width, int height);
 	~DatCoordPoint(void);
 
-	DatCoord<int> getPixelCoord();
+	DatCoord<int>& getPixelCoord();
 	void setPixel(int x, int y);
 	void setPixel(int x, int y, int width, int height);
 	void setPixelX(int x);

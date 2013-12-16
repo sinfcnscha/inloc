@@ -24,6 +24,7 @@
 #include <vector>
 
 #include <iostream>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -36,7 +37,6 @@ using namespace std;
 
 class DatCoordMeth
 {
-
 public:
 	DatCoordMeth(void);
 	~DatCoordMeth(void);
