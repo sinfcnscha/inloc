@@ -79,7 +79,7 @@ int main(){
 	DatCoord<int> Bildmitte;
 	DatCam cam;
 	//DatObjDetect detect("G:\\studium\\Bachelorarbeit\\InLoc\\InLoc_Core\\Debug\\haarcascade.xml");
-	//DatObjDetect detect("haarcascade.xml");
+	DatObjDetect detect("haarcascade.xml");
 	//DatObjDetect detect("haarcascadeNEU.xml");
 	Mat img;
 	cv::Point bildmittelpunkt;
@@ -102,8 +102,8 @@ int main(){
 	/*faktor_musterabstand = 1 / 6.5;*/
 	// ################## Time ##################################################################################################
 
-	//clock_t start, end, start_t_speed, end_t_speed;
-	//double diff, diff_s;
+	clock_t start, end, start_t_speed, end_t_speed;
+	double diff, diff_s;
 
 	cout << "cam.setInputVid = " << cam.setInputVid("/home/askr/projects/inloc/vid_1.AVI") << endl;
 	//cam.setDevice(0);
@@ -116,10 +116,10 @@ int main(){
 		return 0;
 	}
 
-	//detect.detectObjects(img, BildObjekte);
+	detect.detectObjects(img, BildObjekte);
 	
 
-	//WeltBild = DatMapping::DatMappingInit( BildObjekte, Bildmitte );
+	WeltBild = DatMapping::DatMappingInit( BildObjekte, Bildmitte );
 
 	/*if(WeltBild.getCntPicObj() > 2){
 		aktuelle_Position = DatCoordMeth::calcCurrentPosition(WeltBild, Bildmitte);
@@ -327,16 +327,16 @@ int main(){
 		*/
 		gui.update(img, aktuelle_Position, WeltBild, BildObjekte, speed);
 
-		//end = clock();
-		//diff = (end - start);
-		//diff /= CLOCKS_PER_SEC;
-		//cout << "ellapsed seconds: " << diff << endl;
-		//BildObjekte_alt = BildObjekte;
-		//BildObjekte.clear();
+		end = clock();
+		diff = (end - start);
+		diff /= CLOCKS_PER_SEC;
+		cout << "ellapsed seconds: " << diff << endl;
+		BildObjekte_alt = BildObjekte;
+		BildObjekte.clear();
 
-		//vorherige_Position = aktuelle_Position;
+		vorherige_Position = aktuelle_Position;
 
-		//start_t_speed = clock();
+		start_t_speed = clock();
 	}
 	cout << "hello there" << endl;
 
