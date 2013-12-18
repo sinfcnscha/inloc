@@ -62,7 +62,7 @@ void system_pause(void)
 
 int main(){
 	// subtrahend < 0 = Richtung nicht gesetzt
-	//InLoc_Richtung richtung;
+	InLoc_Richtung richtung;
 	//InLoc_ReadCom lese_lagemodul;
 	//int messdaten[ANZ_MESSWERTE];
 	float faktor_musterabstand = 1;
@@ -72,7 +72,7 @@ int main(){
 	DatCoordPoint aktuelle_Position;
 	DatCoordPoint vorherige_Position;
 	double speed = 0;
-	//double track = 0;
+	double track = 0;
 	DatCoordPoints BildObjekte;
 	DatCoordPoints BildObjekte_alt;
 	DatCoordPoints WeltBild;
@@ -106,6 +106,7 @@ int main(){
 	double diff, diff_s;
 
 	cout << "cam.setInputVid = " << cam.setInputVid("/home/askr/projects/inloc/vid_1.AVI") << endl;
+	//cout << "cam.setInputVid = " << cam.setInputVid("/home/askr/projects/inloc/vid_2.AVI") << endl;
 	//cam.setDevice(0);
 
 	
@@ -121,13 +122,13 @@ int main(){
 
 	WeltBild = DatMapping::DatMappingInit( BildObjekte, Bildmitte );
 
-	/*if(WeltBild.getCntPicObj() > 2){
+	if(WeltBild.getCntPicObj() > 2){
 		aktuelle_Position = DatCoordMeth::calcCurrentPosition(WeltBild, Bildmitte);
-	}*/
+	}
 
 
-	//BildObjekte_alt = BildObjekte;
-	//BildObjekte.clear();
+	BildObjekte_alt = BildObjekte;
+	BildObjekte.clear();
 
 
 	// ################## Programmschleife solane Bilddaten vorhanden ###########################################################
@@ -137,16 +138,16 @@ int main(){
 		//cout << "running" << endl;
 		//waitKey(1);
 	
-		//start = clock();
+		start = clock();
 
 		// ################## Bildmittelpunkt bestimmen #########################################################################
-		//bildmittelpunkt.x = img.cols/2;
-		//bildmittelpunkt.y = img.rows/2;
-		//Bildmitte = DatCoord<int>(bildmittelpunkt.x, bildmittelpunkt.y);
+		bildmittelpunkt.x = img.cols/2;
+		bildmittelpunkt.y = img.rows/2;
+		Bildmitte = DatCoord<int>(bildmittelpunkt.x, bildmittelpunkt.y);
 
 
 		// ################## Objekte erkennen und speichern ####################################################################	
-		//detect.detectObjects(img, BildObjekte);
+		detect.detectObjects(img, BildObjekte);
 
 		// ################## Messwerte des Lagemoduls holen ####################################################################
 
@@ -175,15 +176,14 @@ int main(){
 
 
 		// ################## Objekte mappen ####################################################################################	
-		//if(BildObjekte.getCntPicObj() > 0){
-
-			//int schwellwert_dist = BildObjekte.getCoordAt(0).getPixelCoord().getWidth() / 2.5;
-			//WeltBild = DatMapping::DatMappingUpdate( BildObjekte, BildObjekte_alt, Bildmitte, schwellwert_dist, richtung );// /2.2
-		//}
+		if(BildObjekte.getCntPicObj() > 0){
+			int schwellwert_dist = BildObjekte.getCoordAt(0).getPixelCoord().getWidth() / 2.5;
+			WeltBild = DatMapping::DatMappingUpdate( BildObjekte, BildObjekte_alt, Bildmitte, schwellwert_dist, richtung );// /2.2
+		}
 		
-		//if(WeltBild.getCntPicObj() > 2 ){
-		//	aktuelle_Position = DatCoordMeth::calcCurrentPosition(WeltBild, Bildmitte);
-		//}
+		if(WeltBild.getCntPicObj() > 2 ){
+			aktuelle_Position = DatCoordMeth::calcCurrentPosition(WeltBild, Bildmitte);
+		}
 
 		// ################## Messdaten auf aktuelle_Position anwenden ##########################################################
 		
@@ -307,11 +307,11 @@ int main(){
 			f_messwerte << aktuelle_Position.getWorldX() << "," << aktuelle_Position.getWorldY() << endl;
 			f_messwerte.close();
 		}
-		*/
+		99*/
 
 		// ################## Grafische Darstellung #############################################################################
-		//end_t_speed = clock();
-		/*if(vorherige_Position.isWorldSet()){
+		end_t_speed = clock();
+		if(vorherige_Position.isWorldSet()){
 			diff_s = (end_t_speed - start_t_speed) / double(CLOCKS_PER_SEC);
 			track = (aktuelle_Position.getWorldCoord() - vorherige_Position.getWorldCoord()).getVecLen();
 			//if(track > 0.1){
@@ -324,7 +324,7 @@ int main(){
 			cout << "END: " << end_t_speed << " -- START: " << start_t_speed << endl << "Track: " << track << " -- Speed: " << speed << endl << "diff_s: " << diff_s << endl;
 			cout << "x: " << aktuelle_Position.getWorldX() << " -- y: " << aktuelle_Position.getWorldY() << endl;
 		}
-		*/
+		
 		gui.update(img, aktuelle_Position, WeltBild, BildObjekte, speed);
 
 		end = clock();

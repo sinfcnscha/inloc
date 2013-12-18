@@ -66,7 +66,7 @@ int DatCoordPoint::getPixelH(){
 
 
 
-DatCoord<double> DatCoordPoint::getWorldCoord(){
+DatCoord<double> &DatCoordPoint::getWorldCoord(){
 	return this->WorldCoord;
 }
 DatCoord<int>& DatCoordPoint::getPixelCoord(){

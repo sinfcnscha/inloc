@@ -4,10 +4,7 @@
 // Datum Erstellung: 11.01.2013
 // Datum letzte Änderung: 11.01.2013
 
-#pragma once
-
-#include <iostream>
-#include "InLoc_Richtung.h"
+#include <InLoc_Richtung.h>
 
 using namespace std;
 

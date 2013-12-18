@@ -37,7 +37,7 @@ public:
 	int getPixelW();
 	int getPixelH();
 
-	DatCoord<double> getWorldCoord();
+	DatCoord<double> &getWorldCoord();
 	void setWorld(DatCoord<double> input);
 	void setWorld(double x, double y, double z);
 	void setWorld(double x, double y, double z, double width, double height);
