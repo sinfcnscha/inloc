@@ -2,7 +2,7 @@
 // Projekt: Bachelorarbeit Indoorlokalisation mittels AdaBoost
 // Autor: Christian Schauer
 // Datum Erstellung: 01.01.2013
-// Datum letzte Änderung: 12.01.2013
+// Datum letzte Änderung: 16.12.2013
 
 //pragma once
 
@@ -11,6 +11,7 @@
 #include <iostream>
 //#include <cv.h>
 #include <opencv2/highgui/highgui.hpp>
+//#include <opencv2/objdetect/objdetect.hpp>
 //#include <WinSock2.h>
 //#include <WinSock.h>
 //#include <Windows.h>
@@ -52,63 +53,71 @@
 using namespace cv;
 using namespace std;
 
+void system_pause(void)
+{
+	cout << "press key to continue";
+	cin.ignore();
+	cin.get();
+}
+
 int main(){
 	// subtrahend < 0 = Richtung nicht gesetzt
 	//InLoc_Richtung richtung;
 	//InLoc_ReadCom lese_lagemodul;
 	//int messdaten[ANZ_MESSWERTE];
-	//float faktor_musterabstand = 1;
-	//int eingabe_ganzzahl = 0;
+	float faktor_musterabstand = 1;
+	int eingabe_ganzzahl = 0;
 
 
 	DatCoordPoint aktuelle_Position;
 	DatCoordPoint vorherige_Position;
-	//double speed = 0;
+	double speed = 0;
 	//double track = 0;
 	DatCoordPoints BildObjekte;
 	DatCoordPoints BildObjekte_alt;
 	DatCoordPoints WeltBild;
 	DatCoord<int> Bildmitte;
 	DatCam cam;
-	DatObjDetect detect("G:\\studium\\Bachelorarbeit\\InLoc\\InLoc_Core\\Debug\\haarcascade.xml");
+	//DatObjDetect detect("G:\\studium\\Bachelorarbeit\\InLoc\\InLoc_Core\\Debug\\haarcascade.xml");
 	//DatObjDetect detect("haarcascade.xml");
 	//DatObjDetect detect("haarcascadeNEU.xml");
 	Mat img;
 	cv::Point bildmittelpunkt;
 	DatGUI gui;
 	
-	/*
+/*
 	fstream f_messwerte;
 	f_messwerte.open(DATEI_MESSWERTE, ios::out);
 	f_messwerte << "x,y" << endl;
 	f_messwerte.close();
-
+*/
 	// ################## Benutzereingaben ######################################################################################
 	cout << "Abstand der Muster in cm angeben: ";
 	cin >> eingabe_ganzzahl;
 	faktor_musterabstand = 1 / (float)eingabe_ganzzahl;
 	cout << "Ermittelte Werte in cm werden mit " << faktor_musterabstand << " multipliziert" << endl;
-	system("pause");
-	*/
+
+	system_pause();
+	
 	/*faktor_musterabstand = 1 / 6.5;*/
 	// ################## Time ##################################################################################################
 
 	//clock_t start, end, start_t_speed, end_t_speed;
 	//double diff, diff_s;
 
-	//cam.setInputVid("vid_1.avi");
+	cout << "cam.setInputVid = " << cam.setInputVid("/home/askr/projects/inloc/vid_1.AVI") << endl;
 	//cam.setDevice(0);
 
-	/*
+	
 	if(!cam.getCapture(img))
 	{
 		cout << "Fehler: Bilddaten konnten nicht gelesen werden (Kamera nicht angeschlossen?)" << endl;
-		system("pause");
+		//system_pause();
 		return 0;
 	}
 
-	detect.detectObjects(img, BildObjekte);
-	*/
+	//detect.detectObjects(img, BildObjekte);
+	
 
 	//WeltBild = DatMapping::DatMappingInit( BildObjekte, Bildmitte );
 
@@ -122,7 +131,11 @@ int main(){
 
 
 	// ################## Programmschleife solane Bilddaten vorhanden ###########################################################
-	//while(cam.getCapture(img) ){
+	while(cam.getCapture(img) ){
+		
+		//imshow("InLoc", img);	
+		//cout << "running" << endl;
+		//waitKey(1);
 	
 		//start = clock();
 
@@ -312,7 +325,7 @@ int main(){
 			cout << "x: " << aktuelle_Position.getWorldX() << " -- y: " << aktuelle_Position.getWorldY() << endl;
 		}
 		*/
-		//gui.update(img, aktuelle_Position, WeltBild, BildObjekte, speed);
+		gui.update(img, aktuelle_Position, WeltBild, BildObjekte, speed);
 
 		//end = clock();
 		//diff = (end - start);
@@ -324,7 +337,7 @@ int main(){
 		//vorherige_Position = aktuelle_Position;
 
 		//start_t_speed = clock();
-	//}
+	}
 	cout << "hello there" << endl;
 
 // ##########################################################################################################################

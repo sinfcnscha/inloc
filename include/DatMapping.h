@@ -15,7 +15,7 @@
 #include "DatCoordContainer.h"
 #include "DatCoordPoints.h"
 
-#include "InLoc_Richtung.h";
+#include "InLoc_Richtung.h"
 
 using namespace std;
 
